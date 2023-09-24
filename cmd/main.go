@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/spf13/viper"
 	"log"
 	"todoApp"
 	"todoApp/pkg/handler"
@@ -9,15 +10,22 @@ import (
 )
 
 func main() {
-
+	if err := initConfig(); err != nil {
+		log.Fatalf("error with reading configs: %s", err.Error())
+	}
 	repo := repository.NewRepository()
 	services := service.NewService(repo)
 	handlers := handler.NewHandler(services)
 
 	srv := new(todoApp.Server)
-	err := srv.Run("8080", handlers.InitRoutes())
+	err := srv.Run(viper.GetString("port"), handlers.InitRoutes())
 	if err != nil {
-		log.Fatalf("error with runnig srver: %s", err.Error())
+		log.Fatalf("error with runnig sеrver: %s", err.Error())
 	}
 
+}
+func initConfig() error {
+	viper.AddConfigPath("configs")
+	viper.SetConfigName("config")
+	return viper.ReadInConfig()
 }
