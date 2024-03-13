@@ -3,10 +3,12 @@ package main
 import (
 	"log"
 	"os"
+	"todoApp/configs"
 	"todoApp/internal/handler"
 	"todoApp/internal/repository"
-	"todoApp/internal/server"
 	"todoApp/internal/service"
+	"todoApp/pkg/postgres"
+	"todoApp/pkg/server"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -14,7 +16,7 @@ import (
 )
 
 func main() {
-	if err := initConfig(); err != nil {
+	if err := configs.InitConfig(); err != nil {
 		log.Fatalf("error with reading configs: %s", err.Error())
 	}
 
@@ -22,7 +24,7 @@ func main() {
 		log.Fatalf("error with loading env files: %s", err.Error())
 	}
 
-	db, err := repository.NewPostgresDB(repository.Config{
+	db, err := postgres.NewPostgresDB(postgres.Config{
 		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
 		Username: viper.GetString("db.username"),
@@ -45,9 +47,4 @@ func main() {
 		log.Fatalf("error with running server: %s", err.Error())
 	}
 
-}
-func initConfig() error {
-	viper.AddConfigPath("configs")
-	viper.SetConfigName("config")
-	return viper.ReadInConfig()
 }
