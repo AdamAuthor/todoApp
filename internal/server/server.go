@@ -1,4 +1,4 @@
-package todoApp
+package server
 
 import (
 	"context"

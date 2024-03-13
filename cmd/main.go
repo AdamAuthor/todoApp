@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"os"
+	"todoApp/internal/handler"
+	"todoApp/internal/repository"
+	"todoApp/internal/server"
+	"todoApp/internal/service"
+
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
-	"log"
-	"os"
-	"todoApp"
-	"todoApp/pkg/handler"
-	"todoApp/pkg/repository"
-	"todoApp/pkg/service"
 )
 
 func main() {
@@ -19,7 +19,7 @@ func main() {
 	}
 
 	if err := godotenv.Load(); err != nil {
-		fmt.Errorf("error with loading env files: %s", err)
+		log.Fatalf("error with loading env files: %s", err.Error())
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
@@ -39,10 +39,10 @@ func main() {
 	services := service.NewService(repo)
 	handlers := handler.NewHandler(services)
 
-	srv := new(todoApp.Server)
+	srv := new(server.Server)
 	err = srv.Run(viper.GetString("port"), handlers.InitRoutes())
 	if err != nil {
-		log.Fatalf("error with runnig sеrver: %s", err.Error())
+		log.Fatalf("error with running server: %s", err.Error())
 	}
 
 }

@@ -1,8 +1,9 @@
 package handler
 
 import (
+	"todoApp/internal/service"
+
 	"github.com/gin-gonic/gin"
-	"todoApp/pkg/service"
 )
 
 type Handler struct {

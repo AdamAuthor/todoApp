@@ -1,6 +1,7 @@
 package service
 
-import "todoApp/pkg/repository"
+import "todoApp/internal/repository"
+
 
 type Authorization interface {
 }
