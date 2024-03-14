@@ -16,8 +16,8 @@ import (
 )
 
 func main() {
-	log := logger.InitLogger()
-	
+	log := logger.GetLogger()
+
 	if err := configs.InitConfig(); err != nil {
 		log.Fatalf("error with reading configs: %s", err.Error())
 	}
@@ -41,7 +41,7 @@ func main() {
 
 	repo := repository.NewRepository(db)
 	services := service.NewService(repo)
-	handlers := handler.NewHandler(services)
+	handlers := handler.NewHandler(log, services)
 
 	srv := new(server.Server)
 	err = srv.Run(viper.GetString("port"), handlers.InitRoutes())
