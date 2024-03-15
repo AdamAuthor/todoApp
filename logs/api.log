@@ -1,0 +1,4 @@
+[31mFATA[0m[2024-03-15T21:02:57+05:00]main.go:39 main.main() failed to initialize db: dial tcp [::1]:5436: connect: connection refused 
+[31mERRO[0m[2024-03-15T21:05:47+05:00]reponse.go:14 todoApp/internal/handler.newErrorResponse() invalid username                             
+[31mERRO[0m[2024-03-15T21:08:38+05:00]auth.go:46 todoApp/internal/handler.(*Handler).signIn() invalid username                             
+[31mERRO[0m[2024-03-15T21:08:54+05:00]auth.go:46 todoApp/internal/handler.(*Handler).signIn() invalid password                             
