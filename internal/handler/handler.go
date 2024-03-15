@@ -14,7 +14,7 @@ type Handler struct {
 
 func NewHandler(log logger.Logger, srv *service.Service) *Handler {
 	return &Handler{
-		log: log,
+		log:     log,
 		service: srv,
 	}
 }
@@ -27,7 +27,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-up", h.signUp)
 		auth.POST("/sign-in", h.signIn)
 	}
-	api := router.Group("/api")
+	api := router.Group("/api", h.userIdentify)
 	{
 		lists := api.Group("/lists")
 		{
