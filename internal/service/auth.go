@@ -1,7 +1,6 @@
 package service
 
 import (
-	"errors"
 	"time"
 	"todoApp/internal/models"
 	"todoApp/internal/repository"
@@ -36,11 +35,11 @@ func (s *AuthService) CreateUser(user models.User) (int, error) {
 func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	user, err := s.repo.GetUser(username)
 	if err != nil {
-		return "", errors.New("invalid username")
+		return "", err
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return "", errors.New("invalid password")
+		return "", err
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{

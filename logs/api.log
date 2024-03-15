@@ -2,3 +2,6 @@
 [31mERRO[0m[2024-03-15T21:05:47+05:00]reponse.go:14 todoApp/internal/handler.newErrorResponse() invalid username                             
 [31mERRO[0m[2024-03-15T21:08:38+05:00]auth.go:46 todoApp/internal/handler.(*Handler).signIn() invalid username                             
 [31mERRO[0m[2024-03-15T21:08:54+05:00]auth.go:46 todoApp/internal/handler.(*Handler).signIn() invalid password                             
+[31mERRO[0m[2024-03-15T22:19:23+05:00]auth.go:40 todoApp/internal/handler.(*Handler).signIn() invalid password                             
+[31mERRO[0m[2024-03-15T22:21:57+05:00]auth.go:40 todoApp/internal/handler.(*Handler).signIn() crypto/bcrypt: hashedPassword is not the hash of the given password 
+[31mERRO[0m[2024-03-15T22:22:24+05:00]auth.go:40 todoApp/internal/handler.(*Handler).signIn() sql: no rows in result set                   
