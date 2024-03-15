@@ -32,3 +32,8 @@
 [31mERRO[0m[2024-03-15T23:12:12+05:00]middleware.go:35 todoApp/internal/handler.(*Handler).userIdentify() token is malformed: could not JSON decode header: invalid character 'Ã' looking for beginning of value 
 [31mERRO[0m[2024-03-15T23:12:31+05:00]middleware.go:21 todoApp/internal/handler.(*Handler).userIdentify() empty auth header                            
 [31mERRO[0m[2024-03-15T23:12:38+05:00]middleware.go:28 todoApp/internal/handler.(*Handler).userIdentify() invalid auth header                          
+[31mERRO[0m[2024-03-16T02:50:57+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() pq: column "title" of relation "list_items" does not exist 
+[31mERRO[0m[2024-03-16T02:51:50+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() pq: column "title" of relation "list_items" does not exist 
+[31mERRO[0m[2024-03-16T02:53:24+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() sql: no rows in result set                   
+[31mERRO[0m[2024-03-16T02:55:55+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() sql: no rows in result set                   
+[31mERRO[0m[2024-03-16T02:58:11+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() pq: insert or update on table "users_lists" violates foreign key constraint "users_lists_list_id_fkey" 

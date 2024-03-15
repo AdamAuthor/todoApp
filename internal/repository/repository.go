@@ -6,15 +6,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-
 const (
-	usersTable = "users"
-	todoListsTable = "todo_lists"
+	usersTable      = "users"
+	todoListsTable  = "todo_lists"
 	usersListsTable = "users_lists"
-	todoItemsTable = "todo_items"
-	listItemsTable = "list_items"
+	todoItemsTable  = "todo_items"
+	listItemsTable  = "list_items"
 )
-
 
 type Authorization interface {
 	CreateUser(user models.User) (int, error)
@@ -22,6 +20,7 @@ type Authorization interface {
 }
 
 type TodoList interface {
+	Create(userID int, list models.List) (int, error)
 }
 
 type TodoItem interface {
@@ -36,5 +35,6 @@ type Repository struct {
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
+		TodoList:      NewListPostgres(db),
 	}
 }

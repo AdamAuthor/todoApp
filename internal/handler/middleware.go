@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 	"todoApp/internal/models"
@@ -37,4 +38,21 @@ func (h *Handler) userIdentify(c *gin.Context) {
 		return
 	}
 	c.Set(userCtx, userID)
+}
+
+func (h *Handler) getUserID(c *gin.Context) (int, error) {
+	id, ok := c.Get(userCtx)
+	if !ok {
+		h.log.Error(emptyHeader)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, models.ErrorResponse{Message: notFound})
+		return 0, errors.New(notFound)
+	}
+	idInt, ok := id.(int)
+	if !ok {
+		h.log.Error(emptyHeader)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, models.ErrorResponse{Message: notFound})
+		return 0, errors.New(notFound)
+	}
+
+	return idInt, nil
 }

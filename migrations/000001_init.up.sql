@@ -23,7 +23,7 @@ CREATE TABLE users_lists (
     user_id int not null,
     list_id int not null,
     FOREIGN KEY (user_id) REFERENCES users ON DELETE CASCADE,
-    FOREIGN KEY (list_id) REFERENCES users ON DELETE CASCADE
+    FOREIGN KEY (list_id) REFERENCES todo_lists ON DELETE CASCADE
 );
 
 CREATE TABLE list_items (
@@ -31,5 +31,5 @@ CREATE TABLE list_items (
     item_id int not null,
     list_id int not null,
     FOREIGN KEY (item_id) REFERENCES users ON DELETE CASCADE,
-    FOREIGN KEY (list_id) REFERENCES users ON DELETE CASCADE
+    FOREIGN KEY (list_id) REFERENCES todo_lists ON DELETE CASCADE
 );
