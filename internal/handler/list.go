@@ -2,13 +2,15 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 	"todoApp/internal/models"
 
 	"github.com/gin-gonic/gin"
 )
 
 const (
-	notFound = "user id not found"
+	notFound  = "user id not found"
+	invalidID = "invalid id param"
 )
 
 func (h *Handler) createList(c *gin.Context) {
@@ -56,7 +58,25 @@ func (h *Handler) getAllLists(c *gin.Context) {
 }
 
 func (h *Handler) getListById(c *gin.Context) {
+	userID, err := h.getUserID(c)
+	if err != nil {
+		return
+	}
 
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		h.log.Error(err.Error())
+		c.AbortWithStatusJSON(http.StatusInternalServerError, models.ErrorResponse{Message: invalidID})
+		return
+	}
+
+	list, err := h.service.TodoList.GetByID(userID, id)
+	if err != nil {
+		h.log.Error(err.Error())
+		c.AbortWithStatusJSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, list)
 }
 
 func (h *Handler) updateList(c *gin.Context) {

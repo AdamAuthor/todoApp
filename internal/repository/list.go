@@ -46,3 +46,10 @@ func (r *ListPostgres) GetAll(userID int) ([]models.List, error) {
 	err := r.db.Select(&lists, query, userID)
 	return lists, err
 }
+
+func (r *ListPostgres) GetByID(userID, listID int) (models.List, error) {
+	var list models.List
+	query := fmt.Sprintf("SELECT tl.id, tl.title, tl.description FROM %s tl INNER JOIN %s ul on tl.id = ul.list_id WHERE ul.user_id = $1 AND ul.list_id = $2", todoListsTable, usersListsTable)
+	err := r.db.Get(&list, query, userID, listID)
+	return list, err
+}
