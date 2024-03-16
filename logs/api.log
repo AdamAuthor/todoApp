@@ -37,3 +37,5 @@
 [31mERRO[0m[2024-03-16T02:53:24+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() sql: no rows in result set                   
 [31mERRO[0m[2024-03-16T02:55:55+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() sql: no rows in result set                   
 [31mERRO[0m[2024-03-16T02:58:11+05:00]list.go:29 todoApp/internal/handler.(*Handler).createList() pq: insert or update on table "users_lists" violates foreign key constraint "users_lists_list_id_fkey" 
+[31mERRO[0m[2024-03-16T05:16:55+05:00]middleware.go:22 todoApp/internal/handler.(*Handler).userIdentify() empty auth header                            
+[31mERRO[0m[2024-03-16T05:18:02+05:00]list.go:49 todoApp/internal/handler.(*Handler).getAllLists() missing destination name user_id in *[]models.List 

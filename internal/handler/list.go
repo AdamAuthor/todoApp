@@ -35,11 +35,27 @@ func (h *Handler) createList(c *gin.Context) {
 	})
 }
 
-func (h *Handler) getListById(c *gin.Context) {
-
+type getAllListsResponse struct {
+	Data []models.List `json:"data"`
 }
 
 func (h *Handler) getAllLists(c *gin.Context) {
+	userID, err := h.getUserID(c)
+	if err != nil {
+		return
+	}
+	lists, err := h.service.TodoList.GetAll(userID)
+	if err != nil {
+		h.log.Error(err.Error())
+		c.AbortWithStatusJSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, getAllListsResponse{
+		Data: lists,
+	})
+}
+
+func (h *Handler) getListById(c *gin.Context) {
 
 }
 
