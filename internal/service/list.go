@@ -23,6 +23,17 @@ func (s *TodoListService) GetAll(userID int) ([]models.List, error) {
 	return s.repo.GetAll(userID)
 }
 
-func(s *TodoListService) GetByID(userID, listID int) (models.List, error) {
+func (s *TodoListService) GetByID(userID, listID int) (models.List, error) {
 	return s.repo.GetByID(userID, listID)
+}
+
+func (s *TodoListService) Update(userID, listID int, input models.UpdateListInput) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
+	return s.repo.Update(userID, listID, input)
+}
+
+func (s *TodoListService) Delete(userID, listID int) error {
+	return s.repo.Delete(userID, listID)
 }

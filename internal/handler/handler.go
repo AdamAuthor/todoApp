@@ -1,20 +1,16 @@
 package handler
 
 import (
-	"todoApp/internal/service"
-	"todoApp/pkg/logger"
-
 	"github.com/gin-gonic/gin"
+	"todoApp/internal/service"
 )
 
 type Handler struct {
-	log     logger.Logger
 	service *service.Service
 }
 
-func NewHandler(log logger.Logger, srv *service.Service) *Handler {
+func NewHandler(srv *service.Service) *Handler {
 	return &Handler{
-		log:     log,
 		service: srv,
 	}
 }

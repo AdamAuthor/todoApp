@@ -2,12 +2,12 @@
 package main
 
 import (
+	"log"
 	"os"
 	"todoApp/configs"
 	"todoApp/internal/handler"
 	"todoApp/internal/repository"
 	"todoApp/internal/service"
-	"todoApp/pkg/logger"
 	"todoApp/pkg/postgres"
 	"todoApp/pkg/server"
 
@@ -17,8 +17,6 @@ import (
 )
 
 func main() {
-	log := logger.GetLogger()
-
 	if err := configs.InitConfig(); err != nil {
 		log.Fatalf("error with reading configs: %s", err.Error())
 	}
@@ -42,7 +40,7 @@ func main() {
 
 	repo := repository.NewRepository(db)
 	services := service.NewService(repo)
-	handlers := handler.NewHandler(log, services)
+	handlers := handler.NewHandler(services)
 
 	srv := new(server.Server)
 	err = srv.Run(viper.GetString("port"), handlers.InitRoutes())
